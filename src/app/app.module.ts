@@ -8,9 +8,14 @@ import { RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
 import { LoginModule } from './login/login.module';
 import { LoginComponent } from './login/login.component';
+import { CalendarComponent } from './calendar/calendar.component';
+import { NavbarComponent } from './navbar/navbar.component';
+import { CalendarService } from './calendar/calendar.service';
+import { HttpClientModule } from '@angular/common/http';
 
 const appRoutes: Routes = [
   { path: 'login', component: LoginComponent },
+  { path : 'calendar', component: CalendarComponent},
   { path: '',
     redirectTo: '/login',
     pathMatch: 'full'
@@ -19,7 +24,9 @@ const appRoutes: Routes = [
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    CalendarComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,
@@ -27,12 +34,14 @@ const appRoutes: Routes = [
     CalendarModule.forRoot(),
     NgbModule.forRoot(),
     LoginModule,
+    // NavbarComponent,
     RouterModule.forRoot(
       appRoutes,
       { enableTracing: true } // <-- debugging purposes only
-    )
+    ),
+    HttpClientModule
   ],
-  providers: [],
+  providers: [CalendarService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
